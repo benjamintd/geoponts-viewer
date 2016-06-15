@@ -6,7 +6,7 @@ var Mustache // Mustache loaded in index.html
 var L  // leaflet loaded in index.html
 var $  // jQuery loaded in index.html
 var token = 'pk.eyJ1IjoiYmVuamFtaW50ZCIsImEiOiJjaW83enIwNjYwMnB1dmlsejN6cDBzbm93In0.0ZOGwSLp8OjW6vCaEKYFng'
-
+var xp_ids = [388, 405, 345, 244, 316, 1266, 218, 286, 652, 439, 927, 380, 359, 700, 750, 1026, 1443, 722, 626, 682]
 // Define the map
 var map = new L.Map('map-canvas', {
   zoomControl: false
@@ -32,9 +32,7 @@ var LogoControl = L.Control.extend({
 
 map.addControl(new LogoControl())
 
-// Define cluster layer and marker list
-// var markerCluster = L.markerClusterGroup()  // clusters are unused now.
-// map.addLayer(markerCluster)
+// Define marker list, by xp id number
 var markerList = []
 
 // This is where the fun begins
@@ -53,7 +51,7 @@ $.ajax({
 function processData (data) {
   for (var i = 0; i < data.length; i++) {
     buildMarker(data[i])
-    markerList.push(data[i])
+    markerList[data[i].id] = data[i]
   }
   loopMarkers(markerList)
 }
@@ -93,19 +91,19 @@ function renderInfoWindow (marker) {
 
 function flyToMarker (marker) {
   console.log(marker.name)
-  map.flyTo([marker.latitude, marker.longitude], 3, {animate: true, duration: 2.5})
-  setTimeout(function () { map.flyTo([marker.latitude + 0.06, marker.longitude], 10, {animate: true, duration: 2.5}) }, 1700)
-  setTimeout(function () { marker.lMarker.openPopup() }, 4600)
-  setTimeout(function () { marker.lMarker.closePopup() }, 11000)
-  setTimeout(function () { map.flyTo([marker.latitude + 0.06, marker.longitude], 2, {animate: true, duration: 2}) }, 11500)
+  map.flyTo([marker.latitude, marker.longitude], 3, {animate: true, duration: 5})
+  setTimeout(function () { map.flyTo([marker.latitude + 0.06, marker.longitude], 10, {animate: true, duration: 5}) }, 3400)
+  setTimeout(function () { marker.lMarker.openPopup() }, 9200)
+  setTimeout(function () { marker.lMarker.closePopup() }, 22000)
+  setTimeout(function () { map.flyTo([marker.latitude + 0.06, marker.longitude], 2, {animate: true, duration: 4}) }, 23000)
 }
 
 function loopMarkers (markers) {
-  var n = markerList.length
+  var n = xp_ids.length
   var i = 0
-  flyToMarker(markers[i])
+  flyToMarker(markers[xp_ids[i]])
   window.setInterval(function () {
     i = (i + 1) % n
     flyToMarker(markers[i])
-  }, 12500)
+  }, 25000)
 }
