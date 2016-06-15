@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>GéoPonts</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v1.0.0-rc.1/leaflet.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="http://cdn.leafletjs.com/leaflet/v1.0.0-rc.1/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js" integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0=" crossorigin="anonymous"></script>
+    <script src="external/leaflet.markercluster.js" %}"></script>
+    <link rel="stylesheet" href="external/MarkerCluster.Default.css">
+
+  </head>
+  <body>
+     <div id="map-canvas"></div>
+  </body>
+</html>
+
+<script id="templateInfoWindow" type="x-tmpl-mustache">
+<div id="content" class="infowindow">
+    <h4>
+        <a target="_blank" href="/xp/contact/{{ id }}/" class="infowindow-link-inline">
+            {{ name }}, {{ experience_department_display }} {{ promo }}
+        </a>
+    </h4>
+    <h5>
+        à <strong>{{ place }}</strong>
+    </h5>
+    <div id="bodyContent">
+        <ul class="infowindow-list">
+            <li class="li-xptype" title="Type d'expérience">{{ #experience_type_display }}
+                <img alt="" src="{{ experience_type_icon_url }}">
+                {{ experience_type_display }}
+            {{ /experience_type_display }}</li>
+            <li class="li-place" title="Lieu">{{ #city }}
+                <span class="glyphicon glyphicon-map-marker"></span>
+                {{ city }}, {{ country }}
+            {{ /city }}</li>
+            <li class="li-domain" title="Domaine d'activité">{{ #domaine }}
+                <span class="glyphicon glyphicon-{{ glyphicon_domain }}"></span>
+                {{ domaine }}
+            {{ /domaine }}</li>
+            <li class="li-date" title="Période">{{ #f_start_date }}
+                <span class="glyphicon glyphicon-hourglass"></span>
+                {{ #f_end_date }}
+                    De {{ f_start_date }} à
+                    {{ f_end_date }}
+                {{ /f_end_date }}
+                {{ ^f_end_date }}
+                    Commencé en {{ f_start_date }}
+                {{ /f_end_date }}
+            {{ /f_start_date }}</li>
+        </ul>
+        {{ #short_description }}
+            <blockquote class="short-description">
+            <span class="glyphicon glyphicon-comment"></span>
+                {{ short_description }}
+            </blockquote>
+        {{ /short_description }}
+    </div>
+</div>
+</script>
+
+<script src="map.js"></script>

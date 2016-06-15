@@ -1,0 +1,85 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+html, body, #map-canvas {
+  height: 100%;
+  width: 100%;
+}
+
+.logo {
+  background-image: url('/markers/geoponts-logo.png');
+  width:154px;
+  height:142px;
+}
+
+
+/* Infowindows */
+
+.infowindow h4 .label {
+  margin-left: 8px
+  font-size: 65%
+}
+
+.infowindow .markrow span + span {
+  margin-left: 5px
+}
+
+.infowindow-list {
+  list-style-type: none
+  padding:0
+  margin:0
+}
+
+.edition-icon:hover, like-coloration:hover {
+  text-decoration: none
+}
+
+.infowindow-list li .glyphicon,
+.infowindow-list li img {
+  margin-right: 2px
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+  font-size: 14px;
+}
+
+.li-xptype > img {
+  width: 1em
+}
+
+.li-place > .glyphicon:before{
+  color: #eb4d5c
+}
+
+.li-domain > .glyphicon{
+  color: #428bca
+}
+
+.li-date > .glyphicon:before{
+  color: #f0ad4e
+}
+.li-department > .glyphicon:before {
+  color: #5cb85c
+}
+
+.li-yellow > .glyphicon {
+    color: #f0ad4e
+}
+
+.short-description {
+  font-style: italic;
+  max-width: 325px;
+  text-align: justify;
+  font-size: 14px;
+}
+
+.short-description > .glyphicon {
+  color: #BBBBBB;
+}
