@@ -3,13 +3,33 @@ body {
   margin: 0;
 }
 
-html, body, #map-canvas {
+html, body{
   height: 100%;
   width: 100%;
 }
 
+.header {
+  height: 45px;
+  width: 100%;
+  background-color: #555555;
+}
+
+.header p {
+  font-family: "Lato", sans-serif;
+  font-size: 20px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 45px;
+  color: #fff;
+}
+
+#map-canvas {
+  height: calc(100% - 45px);
+  width: 100%;
+}
+
 .logo {
-  background-image: url('/markers/geoponts-logo.png');
+  background-image: url('markers/geoponts-logo.png');
   width:154px;
   height:142px;
 }

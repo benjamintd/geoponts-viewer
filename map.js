@@ -33,21 +33,17 @@ var LogoControl = L.Control.extend({
 map.addControl(new LogoControl())
 
 // Define cluster layer and marker list
-var markerCluster = L.markerClusterGroup()
-map.addLayer(markerCluster)
+// var markerCluster = L.markerClusterGroup()  // clusters are unused now.
+// map.addLayer(markerCluster)
 var markerList = []
 
 // This is where the fun begins
 $.ajax({
   type: 'GET',
-  url: '/data/markers.json',
+  url: 'data/markers.json',
   dataType: 'json',
   success: processData,
   error: function () { window.alert('failed') }
-})
-
-$(document).ready(function () {
-  loopMarkers(markerList)
 })
 
 // -----------------------------------------------------------------------------
@@ -59,6 +55,7 @@ function processData (data) {
     buildMarker(data[i])
     markerList.push(data[i])
   }
+  loopMarkers(markerList)
 }
 
 function buildMarker (marker) {
@@ -83,7 +80,9 @@ function buildMarker (marker) {
   )
 
   lMarker.bindPopup(renderInfoWindow(marker))
-  markerCluster.addLayer(lMarker)
+  // Use if need to cluster. Causes a bug with animations and opening markers.
+  // markerCluster.addLayer(lMarker)
+  lMarker.addTo(map)
   marker.lMarker = lMarker
 }
 
@@ -94,9 +93,11 @@ function renderInfoWindow (marker) {
 
 function flyToMarker (marker) {
   console.log(marker.name)
-  map.flyTo([marker.latitude, marker.longitude], 10, {animate: true, duration: 5})
-  setTimeout(function () { marker.lMarker.openPopup() }, 5700)
+  map.flyTo([marker.latitude, marker.longitude], 3, {animate: true, duration: 2})
+  setTimeout(function () { map.flyTo([marker.latitude, marker.longitude], 10, {animate: true, duration: 2}) }, 1000)
+  setTimeout(function () { marker.lMarker.openPopup() }, 3100)
   setTimeout(function () { marker.lMarker.closePopup() }, 11000)
+  setTimeout(function () { map.flyTo([marker.latitude, marker.longitude], 2, {animate: true, duration: 2}) }, 11500)
 }
 
 function loopMarkers (markers) {
@@ -105,5 +106,5 @@ function loopMarkers (markers) {
   window.setInterval(function () {
     flyToMarker(markers[i])
     i = (i + 1) % n
-  }, 11700)
+  }, 12000)
 }
