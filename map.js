@@ -103,8 +103,9 @@ function flyToMarker (marker) {
 function loopMarkers (markers) {
   var n = markerList.length
   var i = 0
+  flyToMarker(markers[i])
   window.setInterval(function () {
-    flyToMarker(markers[i])
     i = (i + 1) % n
+    flyToMarker(markers[i])
   }, 12000)
 }
