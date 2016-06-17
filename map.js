@@ -93,11 +93,11 @@ function renderInfoWindow (marker) {
 
 function flyToMarker (marker) {
   console.log(marker.name)
-  map.flyTo([marker.latitude, marker.longitude], 3, {animate: true, duration: 2})
-  setTimeout(function () { map.flyTo([marker.latitude, marker.longitude], 10, {animate: true, duration: 2}) }, 1000)
-  setTimeout(function () { marker.lMarker.openPopup() }, 3100)
+  map.flyTo([marker.latitude, marker.longitude], 3, {animate: true, duration: 2.5})
+  setTimeout(function () { map.flyTo([marker.latitude + 0.06, marker.longitude], 10, {animate: true, duration: 2.5}) }, 1700)
+  setTimeout(function () { marker.lMarker.openPopup() }, 4600)
   setTimeout(function () { marker.lMarker.closePopup() }, 11000)
-  setTimeout(function () { map.flyTo([marker.latitude, marker.longitude], 2, {animate: true, duration: 2}) }, 11500)
+  setTimeout(function () { map.flyTo([marker.latitude + 0.06, marker.longitude], 2, {animate: true, duration: 2}) }, 11500)
 }
 
 function loopMarkers (markers) {
@@ -107,5 +107,5 @@ function loopMarkers (markers) {
   window.setInterval(function () {
     i = (i + 1) % n
     flyToMarker(markers[i])
-  }, 12000)
+  }, 12500)
 }

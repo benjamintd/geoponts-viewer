@@ -103,3 +103,8 @@ li {
 .short-description > .glyphicon {
   color: #BBBBBB;
 }
+
+blockquote {
+  padding: 0;
+  border-left: none;
+}
