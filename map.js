@@ -21,7 +21,7 @@ L.tileLayer('https://api.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_tok
 // Add logo
 var LogoControl = L.Control.extend({
   options: {
-    position: 'topleft'
+    position: 'bottomright'
   },
 
   onAdd: function (map) {

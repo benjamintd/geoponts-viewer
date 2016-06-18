@@ -29,9 +29,9 @@ html, body{
 }
 
 .logo {
-  background-image: url('markers/geoponts-logo.png');
-  width:154px;
-  height:142px;
+  background-image: url('markers/geoponts-logo-text.png');
+  width: 290px;
+  height: 62px;
 }
 
 
