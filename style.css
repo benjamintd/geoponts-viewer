@@ -8,23 +8,8 @@ html, body{
   width: 100%;
 }
 
-.header {
-  height: 45px;
-  width: 100%;
-  background-color: #555555;
-}
-
-.header p {
-  font-family: "Lato", sans-serif;
-  font-size: 20px;
-  text-align: center;
-  vertical-align: middle;
-  line-height: 45px;
-  color: #fff;
-}
-
 #map-canvas {
-  height: calc(100% - 45px);
+  height: 100%;
   width: 100%;
 }
 
