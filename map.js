@@ -53,7 +53,9 @@ function processData (data) {
     buildMarker(data[i])
     markerList[data[i].id] = data[i]
   }
-  loopMarkers(markerList)
+  setTimeout(function () {
+    loopMarkers(markerList)
+  }, 1);
 }
 
 function buildMarker (marker) {
@@ -104,6 +106,6 @@ function loopMarkers (markers) {
   flyToMarker(markers[xp_ids[i]])
   window.setInterval(function () {
     i = (i + 1) % n
-    flyToMarker(markers[i])
+    flyToMarker(markers[xp_ids[i]])
   }, 25000)
 }
