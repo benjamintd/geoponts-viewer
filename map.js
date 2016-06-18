@@ -7,6 +7,10 @@ var L  // leaflet loaded in index.html
 var $  // jQuery loaded in index.html
 var token = 'pk.eyJ1IjoiYmVuamFtaW50ZCIsImEiOiJjaW83enIwNjYwMnB1dmlsejN6cDBzbm93In0.0ZOGwSLp8OjW6vCaEKYFng'
 
+// Speed of the animation
+var speedFactor = 1.0;
+
+
 // Define the map
 var map = new L.Map('map-canvas', {
   zoomControl: false
@@ -35,16 +39,24 @@ map.addControl(new LogoControl())
 // Define cluster layer and marker list
 // var markerCluster = L.markerClusterGroup()  // clusters are unused now.
 // map.addLayer(markerCluster)
-var markerList = []
+var markerList = [];
 
 // This is where the fun begins
-$.ajax({
-  type: 'GET',
-  url: 'data/markers.json',
-  dataType: 'json',
-  success: processData,
-  error: function () { window.alert('failed') }
-})
+function startAnimation() {
+    $.ajax({
+        type: 'GET',
+        url: 'data/markers.json',
+        dataType: 'json',
+        success: processData,
+        error: function () { window.alert('Unable to retrieve the markers...'); }
+    });
+}
+
+// Run the animation on page load, after 3s
+// You can comment this to trigger the animation manually
+setTimeout(function () {
+    startAnimation();
+}, 3000);
 
 // -----------------------------------------------------------------------------
 // Functions
@@ -92,20 +104,20 @@ function renderInfoWindow (marker) {
 }
 
 function flyToMarker (marker) {
-  console.log(marker.name)
-  map.flyTo([marker.latitude, marker.longitude], 3, {animate: true, duration: 2.5})
-  setTimeout(function () { map.flyTo([marker.latitude + 0.06, marker.longitude], 10, {animate: true, duration: 2.5}) }, 1700)
-  setTimeout(function () { marker.lMarker.openPopup() }, 4600)
-  setTimeout(function () { marker.lMarker.closePopup() }, 11000)
-  setTimeout(function () { map.flyTo([marker.latitude + 0.06, marker.longitude], 2, {animate: true, duration: 2}) }, 11500)
+  console.log(marker.name);
+  map.flyTo([marker.latitude, marker.longitude], 3, {animate: true, duration: 2.5 * speedFactor});
+  setTimeout(function () { map.flyTo([marker.latitude + 0.06, marker.longitude], 10, {animate: true, duration: 2.5 * speedFactor}); }, 1700 * speedFactor);
+  setTimeout(function () { marker.lMarker.openPopup(); }, 4600 * speedFactor);
+  setTimeout(function () { marker.lMarker.closePopup(); }, 11000 * speedFactor);
+  setTimeout(function () { map.flyTo([marker.latitude + 0.06, marker.longitude], 2, {animate: true, duration: 2 * speedFactor}); }, 11500 * speedFactor);
 }
 
 function loopMarkers (markers) {
-  var n = markerList.length
-  var i = 0
-  flyToMarker(markers[i])
-  window.setInterval(function () {
-    i = (i + 1) % n
-    flyToMarker(markers[i])
-  }, 12500)
+    var n = markerList.length;
+    var i = 0;
+    flyToMarker(markers[i]);
+    window.setInterval(function () {
+        i = (i + 1) % n;
+        flyToMarker(markers[i]);
+    }, 12500 * speedFactor);
 }
