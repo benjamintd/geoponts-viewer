@@ -23,25 +23,25 @@
 <script id="templateInfoWindow" type="x-tmpl-mustache">
 <div id="content" class="infowindow">
     <h3>
-      {{ name }}, {{ experience_department_display }} {{ promo }}
+      {{ name }}<small> {{ experience_department_display }}&nbsp;{{ promo }}</small>
     </h3>
-    <h5>
+    <h4>
         à <strong>{{ place }}</strong>
-    </h5>
+    </h4>
     <div id="bodyContent">
         <ul class="infowindow-list">
             <li class="li-xptype" title="Type d'expérience">{{ #experience_type_display }}
                 <img alt="" src="{{ experience_type_icon_url }}">
                 {{ experience_type_display }}
             {{ /experience_type_display }}</li>
-            <li class="li-place" title="Lieu">{{ #city }}
-                <span class="glyphicon glyphicon-map-marker"></span>
-                {{ city }}, {{ country }}
-            {{ /city }}</li>
             <li class="li-domain" title="Domaine d'activité">{{ #domaine }}
                 <span class="glyphicon glyphicon-{{ glyphicon_domain }}"></span>
                 {{ domaine }}
             {{ /domaine }}</li>
+            <li class="li-place" title="Lieu">{{ #city }}
+                <span class="glyphicon glyphicon-map-marker"></span>
+                {{ city }}, {{ country }}
+            {{ /city }}</li>
             <li class="li-date" title="Période">{{ #f_start_date }}
                 <span class="glyphicon glyphicon-hourglass"></span>
                 {{ #f_end_date }}
